@@ -37,6 +37,18 @@ export default {
   data() {
     return {
       loading: false,
+      accounts: [
+        {
+          username: "admin01",
+          password: "123456",
+          role: "admin"
+        },
+        {
+          username: "super01",
+          password: "123456",
+          role: "super_admin"
+        }
+      ],
       form: {
         loginModel: {
           username: "",
@@ -75,15 +87,30 @@ export default {
       // }catch(e) {
       //   console.log(e);
       // }
-      sessionStorage.setItem("adminToken", "test");
-      this.$router.push({
-        path: '/admin/user/index'
-      })
+      const USER = this.form.loginModel.username;
+      const PWD = this.form.loginModel.password;
+      const result = this.accounts.filter(
+        account => account.username === USER && account.password === PWD
+      );
+      if (result.length !== 0) {
+        sessionStorage.setItem("adminToken", "fakeToken");
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({
+            username: result[0].username,
+            role: result[0].role
+          })
+        );
+        this.$router.push({
+          path: "/admin/user/index"
+        });
+      } else {
+        this.$message.error("用户不存在");
+      }
     }
   }
 };
 </script>
-
 <style lang="scss" scoped>
 .admin-login-container {
   position: absolute;

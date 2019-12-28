@@ -75,7 +75,7 @@ export default {
       // }catch(e) {
       //   console.log(e);
       // }
-      sessionStorage.setItem("token", "test");
+      sessionStorage.setItem("token", "fakeToken");
        this.$router.push({
         path: '/home'
       })

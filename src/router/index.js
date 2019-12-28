@@ -37,7 +37,7 @@ const constantRoutes = [
     },
   }
 ]
- // 后台用户路由
+// 后台用户路由
 const asyncRoutes = [{
     path: '/admin/user/index',
     name: '用户管理',
@@ -70,19 +70,19 @@ const router = new VueRouter({
 
 function generatorRoutes(role) {
   const accessedRouters = asyncRoutes.filter(route => {
-    return  route.meta.role.indexOf(role)!==-1
+    return route.meta.role.indexOf(role) !== -1
   });
+  console.log(accessedRouters)
 }
 
-
-router.beforeEach((to, from, next) => {
-  generatorRoutes('admin');
-  console.log(to)
+// 前中后台鉴权
+function checkGround(to, from, next) {
   if (to.path === '/login' || to.path === '/admin/login') {
     sessionStorage.clear();
   }
+  let token
   if (to.path.split("/")[1] === 'admin') {
-    let token = sessionStorage.getItem('adminToken');
+    token = sessionStorage.getItem('adminToken');
     if (!token && to.path !== '/admin/login') {
       next({
         path: '/admin/login'
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    let token = sessionStorage.getItem('token');
+    token = sessionStorage.getItem('token');
     if (!token && to.path !== '/login') {
       next({
         path: '/login'
@@ -100,5 +100,12 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
+}
+
+
+
+router.beforeEach((to, from, next) => {
+  generatorRoutes('admin');
+  checkGround(to, from, next);
 })
 export default router
