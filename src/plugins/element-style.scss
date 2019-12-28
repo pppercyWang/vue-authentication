@@ -1,0 +1,46 @@
+.admin-layout {
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+
+  .el-menu-item:focus,
+  .el-menu-item:hover {
+    background-color: #474d54;
+  }
+
+  .el-menu-item {
+    color: #bbbbbb;
+  }
+
+  .el-submenu__title:hover {
+    background-color: #474d54;
+  }
+
+  .el-submenu__title {
+    color: #bbbbbb;
+  }
+
+  .el-menu {
+    background-color: #303133;
+  }
+}
+.admin-login-container {
+  .login-form {
+    .el-button--primary {
+      background-color: #234669 !important;
+      border-color: #234669 !important;
+    }
+
+    .el-button--primary:focus,
+    .el-button--primary:hover {
+      background-color: #3d6c9c !important;
+      border-color: #3d6c9c !important;
+    }
+    .el-button--primary.is-active, .el-button--primary:active {
+      
+      background-color: #2c5884 !important;
+      border-color: #2c5884 !important;
+    }
+  }
+}

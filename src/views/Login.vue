@@ -1,0 +1,113 @@
+<template>
+  <div class="login-container">
+    <el-form
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+      :rules="form.rules"
+      :model="form.loginModel"
+    >
+      <h3 class="title">用户登录</h3>
+      <el-form-item prop="username">
+        <el-input
+          placeholder="请输入用户名"
+          prefix-icon="el-icon-user-solid"
+          v-model="form.loginModel.username"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          placeholder="请输入密码"
+          type="password"
+          prefix-icon="el-icon-lock"
+          v-model="form.loginModel.password"
+        ></el-input>
+      </el-form-item>
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click="login"
+      >登 录</el-button>
+    </el-form>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      loading: false,
+      form: {
+        loginModel: {
+          username: "",
+          password: ""
+        },
+        // 表单验证规则
+        rules: {
+          username: [
+            { required: true, message: "请输入用户名", trigger: "blur" },
+            {
+              min: 1,
+              max: 20,
+              message: "长度在 1 到 20 个字符",
+              trigger: "blur"
+            }
+          ],
+          password: [
+            { required: true, message: "请输入密码", trigger: "blur" },
+            {
+              min: 1,
+              max: 20,
+              message: "长度在 1 到 20 个字符",
+              trigger: "blur"
+            }
+          ]
+        }
+      }
+    };
+  },
+  mounted() {},
+  methods: {
+    async login() {
+      // try{
+      // const res = await this.$http.post(`${this.$api.USER.login}`,this.form.loginModel)
+      // todo...
+      // }catch(e) {
+      //   console.log(e);
+      // }
+      sessionStorage.setItem("token", "test");
+       this.$router.push({
+        path: '/home'
+      })
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.login-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f3f3f3;
+  .login-form {
+    width: 420px;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 160px;
+    padding: 30px;
+    border: 1px solid #ececec;
+    box-shadow: 2px 2px 16px;
+    border-radius: 10px;
+  }
+  .title {
+    font-size: 26px;
+    color: #383838;
+    text-align: center;
+    font-weight: 700;
+    margin: 60px 0;
+  }
+}
+</style>
+
+
