@@ -23,7 +23,7 @@ const constantRoutes = [
       path: '/login'
     },
     children: [{
-      path: '/home',
+      path: 'home',
       name: '首页',
       component: () => import('@/views/foreground/Home.vue'),
     }]
@@ -35,11 +35,21 @@ const constantRoutes = [
     redirect: {
       path: '/admin/login'
     },
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404.vue'),
+  },
+  {
+    path: '/*',
+    redirect: {
+      path: '/404'
+    },
   }
 ]
 // 后台用户路由
 const asyncRoutes = [{
-    path: '/admin/user/index',
+    path: 'user/index',
     name: '用户管理',
     meta: {
       role: ['admin', 'super_admin']
@@ -47,7 +57,7 @@ const asyncRoutes = [{
     component: () => import('@/views/background/UserManagement.vue'),
   },
   {
-    path: '/admin/order/index',
+    path: 'order/index',
     name: '订单管理',
     meta: {
       role: ['admin', 'super_admin']
@@ -55,13 +65,13 @@ const asyncRoutes = [{
     component: () => import('@/views/background/OrderManagement.vue'),
   },
   {
-    path: '/admin/bill/index',
+    path: 'bill/index',
     name: '账单管理',
     meta: {
       role: ['super_admin']
     },
     component: () => import('@/views/background/BillManagement.vue'),
-  }
+  },
 ]
 
 const router = new VueRouter({
@@ -72,13 +82,20 @@ function generatorRoutes(role) {
   const accessedRouters = asyncRoutes.filter(route => {
     return route.meta.role.indexOf(role) !== -1
   });
-  console.log(accessedRouters)
+  return accessedRouters
 }
 
-// 前中后台鉴权
+// 前后台鉴权
 function checkGround(to, from, next) {
+  console.log(to.path)
+  if(to.path === '/404'){
+    next();
+    return
+  }
   if (to.path === '/login' || to.path === '/admin/login') {
     sessionStorage.clear();
+    next();
+    return
   }
   let token
   if (to.path.split("/")[1] === 'admin') {
@@ -88,7 +105,15 @@ function checkGround(to, from, next) {
         path: '/admin/login'
       })
     } else {
-      next()
+      // if (to.path !== 'admin/login') {
+      //   const user = JSON.parse(sessionStorage.getItem('user'))
+      //   // const accessedRouters = generatorRoutes(user.role);
+      //   // router.addRoutes(accessedRouters)
+      //   next()
+      // }else{
+      //   next();
+      // }
+      next();
     }
   } else {
     token = sessionStorage.getItem('token');
@@ -102,10 +127,7 @@ function checkGround(to, from, next) {
   }
 }
 
-
-
 router.beforeEach((to, from, next) => {
-  generatorRoutes('admin');
   checkGround(to, from, next);
 })
 export default router
