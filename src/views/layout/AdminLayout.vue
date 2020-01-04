@@ -13,17 +13,9 @@
         :collapse="isCollapse"
         router
       >
-        <el-menu-item index="/admin/user/index">
-           <i class="el-icon-s-custom"></i>
-          <span slot="title">用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="/admin/order/index">
-          <i class="el-icon-s-order"></i>
-          <span slot="title">订单管理</span>
-        </el-menu-item>
-        <el-menu-item index="/admin/bill/index">
-          <i class="el-icon-s-finance"></i>
-          <span slot="title">财务管理</span>
+        <el-menu-item :index="`/admin/${item.path}`" v-for="(item,index) in backgroundMenuData" v-bind:key="index">
+          <i class="el-icon-s-custom"></i>
+          <span slot="title">{{item.name}}</span>
         </el-menu-item>
       </el-menu>
       <el-col :span="24" class="content-wrapper">
@@ -36,12 +28,21 @@
 </template>
 <script>
 import "@/assets/icon.css";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       isCollapse: false
     };
   },
+computed: {
+    ...mapGetters([
+    'validRoutes',
+    'backgroundMenuData'
+    ])
+
+},
   methods: {
     collapse() {
       this.isCollapse = !this.isCollapse;

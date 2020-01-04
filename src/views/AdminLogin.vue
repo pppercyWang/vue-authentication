@@ -51,8 +51,8 @@ export default {
       ],
       form: {
         loginModel: {
-          username: "",
-          password: ""
+          username: "super01",
+          password: "123456"
         },
         // 表单验证规则
         rules: {
