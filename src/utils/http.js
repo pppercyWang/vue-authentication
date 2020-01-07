@@ -8,11 +8,7 @@ class Http {
       timeout: 5000000
     });
     this.$axios.interceptors.request.use(config => {
-      if (config.url.split("/")[0] === "admin") {
-        config['headers']['Authorization'] = 'BEARER ' + sessionStorage.getItem('adminToken');
-      } else {
-        config['headers']['Authorization'] = 'BEARER ' + sessionStorage.getItem('token');
-      }
+      config['headers']['Authorization'] = 'BEARER ' + sessionStorage.getItem('token');
       config['data'] = qs.stringify(config['data']);
       return config;
     }, error => Promise.reject(error));
@@ -22,11 +18,7 @@ class Http {
           if (response.data.Status === 200) {
             return Promise.resolve(response.data);
           } else if (response.data.Status === 502) {
-            if (sessionStorage.getItem("adminToken")) {
-              router.push("admin/login")
-            } else {
               router.push("/login")
-            }
             return Promise.reject(response.data);
           } else if (response.data.Status === 201) {
             return Promise.reject(response.data);

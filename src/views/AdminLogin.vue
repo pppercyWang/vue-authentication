@@ -98,7 +98,8 @@ export default {
           "user",
           JSON.stringify({
             username: result[0].username,
-            role: result[0].role
+            role: result[0].role,
+            ground: 'back'
           })
         );
         this.$router.push({
