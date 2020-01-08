@@ -118,7 +118,15 @@ export function getValidRoutes(target, role, commit) {
             route.children = route.children.filter(each => each.meta.roles.includes(role) === true)
         }
     });
-    commit('SET_BACKGROUD_MENU_DATA', dynamicRoutes[target])
+    switch (target) {
+        case 'admin':
+            commit('SET_BACKGROUD_MENU_DATA', dynamicRoutes[target])
+            break
+        case 'agent':
+            commit('SET_MIDGROUD_MENU_DATA', dynamicRoutes[target])
+            break
+    }
+
     return new Array(...dynamicRoutes[target], dynamicRoutes['404'])
 }
 

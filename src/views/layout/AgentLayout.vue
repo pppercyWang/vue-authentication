@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["validRoutes", "backgroundMenuData"])
+    ...mapGetters(["validRoutes", "midgroundMenuData"])
   },
   methods: {
     collapse() {
