@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
     next()
     return;
   }
-  if (to.path === '/login' || to.path === '/admin/login') {
+  if (to.path === '/login' || to.path === '/admin/login' || to.path === '/agent/login') {
     sessionStorage.clear();
     router.matcher = createRouter().matcher // 初始化routes
     next()

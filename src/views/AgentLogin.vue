@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-login-container">
+  <div class="agent-login-container">
     <el-form
       class="login-form"
       auto-complete="on"
@@ -7,7 +7,7 @@
       :rules="form.rules"
       :model="form.loginModel"
     >
-      <h3 class="title">总后台登录</h3>
+      <h3 class="title">中台登录</h3>
       <el-form-item prop="username">
         <el-input
           placeholder="请输入用户名"
@@ -39,19 +39,19 @@ export default {
       loading: false,
       accounts: [
         {
-          username: "admin01",
+          username: "agent01",
           password: "123456",
-          role: "admin"
+          role: "agent"
         },
         {
-          username: "super_admin01",
+          username: "super_agent01",
           password: "123456",
-          role: "super_admin"
+          role: "super_agent"
         }
       ],
       form: {
         loginModel: {
-          username: "super_admin01",
+          username: "super_agent01",
           password: "123456"
         },
         // 表单验证规则
@@ -93,17 +93,17 @@ export default {
         account => account.username === USER && account.password === PWD
       );
       if (result.length !== 0) {
-        sessionStorage.setItem("adminToken", "fakeToken");
+        sessionStorage.setItem("agentToken", "fakeToken");
         sessionStorage.setItem(
           "user",
           JSON.stringify({
             username: result[0].username,
             role: result[0].role,
-            ground: 'back'
+            ground: 'mid'
           })
         );
         this.$router.push({
-          path: "/admin/user/index"
+          path: "/agent/user/index"
         });
       } else {
         this.$message.error("用户不存在");
@@ -113,7 +113,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.admin-login-container {
+.agent-login-container {
   position: absolute;
   top: 0;
   bottom: 0;

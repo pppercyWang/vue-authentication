@@ -1,61 +1,58 @@
-
 import _ from 'lodash'
 export const dynamicRoutes = {
-    // 'agent': [
-    //     {
-    //         path: '/agent/user',
-    //         component: () => import('@/views/layout/AgentLayout.vue'),
-    //         name: '用户管理',
-    //         redirect: '/agent/user/index',
-    //         children: [{
-    //                 path: 'index',
-    //                 component: () => import('@/views/midground/user/Index.vue'),
-    //                 name: '用户列表',
-    //                 meta: {
-    //                     roles: ['super_agent', 'agent']
-    //                 },
-    //             },
-    //             {
-    //                 path: 'detail',
-    //                 component: () => import('@/views/midground/user/UserDetail.vue'),
-    //                 name: '用户详情',
-    //                 meta: {
-    //                     roles: ['super_agent']
-    //                 },
-    //             },
-    //         ]
-    //     },
-    //     {
-    //         path: '/agent/log',
-    //         component: () => import('@/views/layout/AgentLayout.vue'),
-    //         name: '日志管理',
-    //         redirect: '/agent/log/index',
-    //         children: [{
-    //             path: 'index',
-    //             component: () => import('@/views/midground/log/Index.vue'),
-    //             name: '日志列表',
-    //             meta: {
-    //                 roles: ['super_agent', 'agent']
-    //             },
-    //         }, ]
-    //     },
-    //     {
-    //         path: '/agent/bill',
-    //         component: () => import('@/views/layout/AgentLayout.vue'),
-    //         name: '账单管理',
-    //         redirect: '/agent/bill/index',
-    //         children: [{
-    //             path: 'index',
-    //             component: () => import('@/views/midground/bill/Index.vue'),
-    //             name: '账单列表',
-    //             meta: {
-    //                 roles: ['super_agent']
-    //             },
-    //         }, ]
-    //     },
-    // ],
-    'admin': [
+    'agent': [{
+            path: '/agent/user',
+            component: () => import('@/views/layout/AgentLayout.vue'),
+            name: '用户管理',
+            redirect: '/agent/user/index',
+            children: [{
+                    path: 'index',
+                    component: () => import('@/views/midground/user/Index.vue'),
+                    name: '用户列表',
+                    meta: {
+                        roles: ['super_agent', 'agent']
+                    },
+                },
+                {
+                    path: 'detail',
+                    component: () => import('@/views/midground/user/UserDetail.vue'),
+                    name: '用户详情',
+                    meta: {
+                        roles: ['super_agent']
+                    },
+                },
+            ]
+        },
         {
+            path: '/agent/log',
+            component: () => import('@/views/layout/AgentLayout.vue'),
+            name: '日志管理',
+            redirect: '/agent/log/index',
+            children: [{
+                path: 'index',
+                component: () => import('@/views/midground/log/Index.vue'),
+                name: '日志列表',
+                meta: {
+                    roles: ['super_agent', 'agent']
+                },
+            }, ]
+        },
+        {
+            path: '/agent/bill',
+            component: () => import('@/views/layout/AgentLayout.vue'),
+            name: '账单管理',
+            redirect: '/agent/bill/index',
+            children: [{
+                path: 'index',
+                component: () => import('@/views/midground/bill/Index.vue'),
+                name: '账单列表',
+                meta: {
+                    roles: ['super_agent']
+                },
+            }, ]
+        },
+    ],
+    'admin': [{
             path: '/admin/user',
             component: () => import('@/views/layout/AdminLayout.vue'),
             name: '用户管理',
@@ -112,7 +109,6 @@ export const dynamicRoutes = {
         redirect: {
             path: '/404'
         },
-        hidden: true
     },
 }
 
@@ -128,30 +124,51 @@ export function getValidRoutes(target, role, commit) {
 
 export function authentication(to, from, next, store, router) {
     let token;
-    if (to.path.split("/")[1] === 'admin') {
-        token = sessionStorage.getItem('adminToken');
-        if (!token && to.path !== '/admin/login') {
-            next({
-                path: '/admin/login'
-            })
-        } else {
-            const isAuth = sessionStorage.getItem('isAuthentication')
-            if (!isAuth || isAuth === '0') {
-                store.dispatch('generateRoutes', JSON.parse(sessionStorage.getItem('user')).role).then(validRoutes => {
-                    router.addRoutes(validRoutes)
-                    sessionStorage.setItem('isAuthentication', '1')
+    console.log(to.path.split("/")[1])
+    switch (to.path.split("/")[1]) {
+        case 'admin':
+            token = sessionStorage.getItem('adminToken');
+            if (!token && to.path !== '/admin/login') {
+                next({
+                    path: '/admin/login'
                 })
+            } else {
+                const isAuth = sessionStorage.getItem('isAuthentication')
+                if (!isAuth || isAuth === '0') {
+                    store.dispatch('generateRoutes', JSON.parse(sessionStorage.getItem('user')).role).then(validRoutes => {
+                        router.addRoutes(validRoutes)
+                        sessionStorage.setItem('isAuthentication', '1')
+                    })
+                }
+                next();
             }
-            next();
-        }
-    } else {
-        token = sessionStorage.getItem('token');
-        if (!token && to.path !== '/login') {
-            next({
-                path: '/login'
-            })
-        } else {
-            next()
-        }
+            break;
+        case 'agent':
+            token = sessionStorage.getItem('agentToken');
+            if (!token && to.path !== '/agent/login') {
+                next({
+                    path: '/agent/login'
+                })
+            } else {
+                const isAuth = sessionStorage.getItem('isAuthentication')
+                if (!isAuth || isAuth === '0') {
+                    store.dispatch('generateRoutes', JSON.parse(sessionStorage.getItem('user')).role).then(validRoutes => {
+                        router.addRoutes(validRoutes)
+                        sessionStorage.setItem('isAuthentication', '1')
+                    })
+                }
+                next();
+            }
+            break;
+        default:
+            token = sessionStorage.getItem('token');
+            if (!token && to.path !== '/login') {
+                next({
+                    path: '/login'
+                })
+            } else {
+                next()
+            }
+            break;
     }
 }
