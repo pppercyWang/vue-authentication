@@ -1,11 +1,11 @@
 <template>
   <div class="foreground-home">
-    <div class="test">这是用户管理界面</div>
-    <div class="test">这是用户管理界面</div>
-    <div class="test">这是用户管理界面</div>
-    <div class="test">这是用户管理界面</div>
-    <div class="test">这是用户管理界面</div>
-    <div class="test">这是用户管理界面</div>
+    <div class="test">这是订单管理界面</div>
+    <div class="test">这是订单管理界面</div>
+    <div class="test">这是订单管理界面</div>
+    <div class="test">这是订单管理界面</div>
+    <div class="test">这是订单管理界面</div>
+    <div class="test">这是订单管理界面</div>
   </div>
 </template>
 <script>
