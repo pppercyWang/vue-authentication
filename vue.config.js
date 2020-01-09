@@ -6,7 +6,7 @@ module.exports = {
         target: 'http://localhost:8848',
         changeOrigin: true,
         pathRewrite: {
-          '^proxy': ''
+          '^proxy': ''  //将url中的proxy子串去掉
         }
       }
     }

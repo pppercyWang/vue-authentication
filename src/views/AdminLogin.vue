@@ -7,7 +7,7 @@
       :rules="form.rules"
       :model="form.loginModel"
     >
-      <h3 class="title">总后台登录</h3>
+      <h3 class="title">后台登录</h3>
       <el-form-item prop="username">
         <el-input
           placeholder="请输入用户名"
@@ -39,12 +39,17 @@ export default {
       loading: false,
       accounts: [
         {
-          username: "admin01",
+          username: "ip_admin01", // ip管理员
+          password: "123456",
+          role: "ip_admin"
+        },
+        {
+          username: "admin01", // 普通管理员
           password: "123456",
           role: "admin"
         },
         {
-          username: "super_admin01",
+          username: "super_admin01", // 超级管理员
           password: "123456",
           role: "super_admin"
         }
@@ -82,7 +87,7 @@ export default {
   methods: {
     async login() {
       // try{
-      // const res = await this.$http.post(`${this.$api.USER.login}`,this.form.loginModel)
+      // const res = await this.$http.post(`${this.$api.ADMIN.login}`,this.form.loginModel)
       // todo...
       // }catch(e) {
       //   console.log(e);
@@ -99,12 +104,20 @@ export default {
           JSON.stringify({
             username: result[0].username,
             role: result[0].role,
-            ground: 'back'
+            ground: "back"
           })
         );
-        this.$router.push({
-          path: "/admin/user/index"
-        });
+        switch (result[0].role) {
+          case "ip_admin":
+            this.$router.push("/admin/ip/index");
+            break;
+          case "admin":
+            this.$router.push("/admin/user/index");
+            break;
+          case "super_admin":
+            this.$router.push("/admin/user/index");
+            break;
+        }
       } else {
         this.$message.error("用户不存在");
       }

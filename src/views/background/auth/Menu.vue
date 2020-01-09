@@ -1,21 +1,21 @@
 <template>
   <div class="foreground-home">
-    <div class="test">这是用户商品详情界面</div>
+    这是菜单管理界面
   </div>
 </template>
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
-  methods: {}
+  methods: {
+  }
 };
 </script>
+
 <style lang="scss" scoped>
 .foreground-home {
-  text-align: center;
-  .test {
-    height: 400px;
-  }
+    text-align: center;
 }
 </style>

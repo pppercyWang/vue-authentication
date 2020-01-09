@@ -55,6 +55,6 @@ Vue.use(Popover).use(Container).use(Aside).use(Main).use(Pagination).use(Scrollb
 Vue.use(TimeSelect)
 Vue.use(TimePicker)
 Vue.use(Dialog)
-Vue.prototype.$message = Message
 Vue.use(Loading.directive)
+Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

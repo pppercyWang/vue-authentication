@@ -3,13 +3,13 @@ const AGENT = 'agent'
 const ADMIN = 'admin'
 export default {
   USER: {
-    login: `${USER}/User/login`,
-    upload: `${USER}/Util/upload`,
+    login: `${USER}/user/login`,
+    upload: `${USER}/util/upload`,
   },
   AGENT: {
-    login: `${AGENT}/User/login`,
+    login: `${AGENT}/user/login`,
   },
   ADMIN: {
-    login: `${ADMIN}/User/login`,
+    login: `${ADMIN}/user/login`,
   },
 }

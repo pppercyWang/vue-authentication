@@ -37,10 +37,16 @@ export default {
   data() {
     return {
       loading: false,
+      accounts: [
+        {
+          username: "user01",
+          password: "123456"
+        }
+      ],
       form: {
         loginModel: {
-          username: "",
-          password: ""
+          username: "user01",
+          password: "123456"
         },
         // 表单验证规则
         rules: {
@@ -75,10 +81,26 @@ export default {
       // }catch(e) {
       //   console.log(e);
       // }
-      sessionStorage.setItem("token", "fakeToken");
-       this.$router.push({
-        path: '/home'
-      })
+      const USER = this.form.loginModel.username;
+      const PWD = this.form.loginModel.password;
+      const result = this.accounts.filter(
+        account => account.username === USER && account.password === PWD
+      );
+      if (result.length !== 0) {
+        sessionStorage.setItem("token", "fakeToken");
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({
+            username: result[0].username,
+            ground: "fore"
+          })
+        );
+        this.$router.push({
+          path: "/home"
+        });
+      } else {
+        this.$message.error("用户不存在");
+      }
     }
   }
 };

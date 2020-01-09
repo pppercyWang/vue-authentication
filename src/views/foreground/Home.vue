@@ -17,5 +17,8 @@ export default {
 <style lang="scss" scoped>
 .foreground-home {
     text-align: center;
+    h1{
+      margin-top: 300px;
+    }
 }
 </style>

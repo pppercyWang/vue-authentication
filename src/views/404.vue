@@ -23,4 +23,3 @@ export default {
   color: #888;
 }
 </style>
-

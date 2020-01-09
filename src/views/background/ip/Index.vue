@@ -1,6 +1,6 @@
 <template>
   <div class="foreground-home">
-    这是日志管理界面
+    这是ip管理界面
   </div>
 </template>
 <script>

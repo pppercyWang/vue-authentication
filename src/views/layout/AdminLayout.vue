@@ -16,17 +16,21 @@
         :collapse="isCollapse"
         router
       >
-          <el-submenu :index="index.toString()" v-for="(item,index) in backgroundMenuData" v-bind:key="index">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>{{item.name}}</span>
-            </template>
-            <el-menu-item
-              :index="`${item.path}/${item2.path}`"
-              v-for="(item2,index2) in item.children"
-              v-bind:key="index2"
-            >{{item2.name}}</el-menu-item>
-          </el-submenu>
+        <el-submenu
+          :index="index.toString()"
+          v-for="(item,index) in backgroundMenuData"
+          v-bind:key="index"
+        >
+          <template slot="title">
+            <i :class="item.icon"></i>
+            <span>{{item.name}}</span>
+          </template>
+          <el-menu-item
+            :index="`${item.path}/${item2.path}`"
+            v-for="(item2,index2) in item.children"
+            v-bind:key="index2"
+          >{{item2.name}}</el-menu-item>
+        </el-submenu>
       </el-menu>
       <el-col :span="24" class="content-wrapper">
         <transition name="fade" mode="out-in">
@@ -46,7 +50,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["validRoutes", "backgroundMenuData"])
+    ...mapGetters(["backgroundMenuData"])
   },
   methods: {
     collapse() {
@@ -55,6 +59,8 @@ export default {
     loginOut() {
       this.$router.push("/admin/login");
     }
+  },
+  created() {
   }
 };
 </script>

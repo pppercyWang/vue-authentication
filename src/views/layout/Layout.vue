@@ -1,20 +1,23 @@
 <template>
   <div class="layout">
-    <div class="layout__content">
-      <router-view></router-view>
+    <div class="header">
+      <h3>header</h3>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
-
 <style lang="scss" scoped>
+.layout {
+  .header {
+    text-align: center
+  }
+}
 </style>

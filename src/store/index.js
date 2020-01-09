@@ -12,7 +12,7 @@ export default new Vuex.Store({
   },
   getters: {
     backgroundMenuData: state => state.backgroundMenuData, // 后台菜单数据
-    midgroundMenuData: state => state.midgroundMenuData 
+    midgroundMenuData: state => state.midgroundMenuData
   },
   mutations: {
     SET_BACKGROUD_MENU_DATA(state, data) {
@@ -29,22 +29,21 @@ export default new Vuex.Store({
       return new Promise(resolve => {
         let validRoutes
         switch (JSON.parse(sessionStorage.getItem('user')).ground) {
-          case 'back':
-            validRoutes = getValidRoutes('admin', role, commit)
+          case 'fore':
+            validRoutes = getValidRoutes('user', role, commit)
             resolve(validRoutes);
             break
           case 'mid':
             validRoutes = getValidRoutes('agent', role, commit)
             resolve(validRoutes);
             break
+          case 'back':
+            validRoutes = getValidRoutes('admin', role, commit)
+            resolve(validRoutes);
+            break
         }
       })
     },
-    clearRoutes({
-      commit
-    }) {
-      commit('CLEAR_VALID_ROUTES')
-    }
   },
   modules: {}
 })

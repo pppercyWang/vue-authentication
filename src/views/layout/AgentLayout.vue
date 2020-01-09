@@ -4,7 +4,7 @@
       <div class="header-button__collapse" @click="collapse">
         <i class="iconfont percy-icon-menu"></i>
       </div>
-      <div class="header-title">后台管理系统 - Content Manager System</div>
+      <div class="header-title">中台管理系统 - Content Manager System</div>
       <div class="header-exit" @click="loginOut">
         <i class="el-icon-switch-button"></i>
       </div>
@@ -18,7 +18,7 @@
       >
           <el-submenu :index="index.toString()" v-for="(item,index) in midgroundMenuData" v-bind:key="index">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i :class="item.icon"></i>
               <span>{{item.name}}</span>
             </template>
             <el-menu-item
@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["validRoutes", "midgroundMenuData"])
+    ...mapGetters(["midgroundMenuData"])
   },
   methods: {
     collapse() {

@@ -1,21 +1,27 @@
 <template>
   <div class="foreground-home">
-    这是订单管理界面
+    <div class="test">这是用户管理界面</div>
+    <div class="test">这是用户管理界面</div>
+    <div class="test">这是用户管理界面</div>
+    <div class="test">这是用户管理界面</div>
+    <div class="test">这是用户管理界面</div>
+    <div class="test">这是用户管理界面</div>
   </div>
 </template>
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .foreground-home {
-    text-align: center;
+  text-align: center;
+  .test {
+    height: 400px;
+  }
 }
 </style>

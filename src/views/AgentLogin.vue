@@ -39,9 +39,9 @@ export default {
       loading: false,
       accounts: [
         {
-          username: "agent01",
+          username: "order_agent01",
           password: "123456",
-          role: "agent"
+          role: "order_agent"
         },
         {
           username: "super_agent01",
@@ -82,7 +82,7 @@ export default {
   methods: {
     async login() {
       // try{
-      // const res = await this.$http.post(`${this.$api.USER.login}`,this.form.loginModel)
+      // const res = await this.$http.post(`${this.$api.AGENT.login}`,this.form.loginModel)
       // todo...
       // }catch(e) {
       //   console.log(e);
@@ -99,12 +99,17 @@ export default {
           JSON.stringify({
             username: result[0].username,
             role: result[0].role,
-            ground: 'mid'
+            ground: "mid"
           })
         );
-        this.$router.push({
-          path: "/agent/user/index"
-        });
+        switch (result[0].role) {
+          case "order_agent":
+            this.$router.push("/agent/order/index");
+            break;
+          case "super_agent":
+            this.$router.push("/agent/member/index");
+            break;
+        }
       } else {
         this.$message.error("用户不存在");
       }

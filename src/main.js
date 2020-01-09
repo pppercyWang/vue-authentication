@@ -16,13 +16,9 @@ Vue.prototype.$api = api;
 Vue.prototype.$http = new http(router);
 Vue.prototype._ = _
 router.beforeEach((to, from, next) => {
-  if (to.path === '/404') {
-    next()
-    return;
-  }
-  if (to.path === '/login' || to.path === '/admin/login' || to.path === '/agent/login') {
+  if (to.path === '/login' || to.path === '/agent/login' || to.path === '/admin/login') {
     sessionStorage.clear();
-    router.matcher = createRouter().matcher // 初始化routes
+    router.matcher = createRouter().matcher // 初始化routes,移除所有dynamicRoutes
     next()
     return
   }
@@ -30,9 +26,10 @@ router.beforeEach((to, from, next) => {
 })
 window.onbeforeunload = function () {
   if (sessionStorage.getItem('user')) {
-    sessionStorage.setItem('isAuthentication', '0') // 在登录后的页面刷新页面，需重新生成路由
+    sessionStorage.setItem('isAuthentication', '0') // 在某个系统登录后，页面刷新，需重新生成路由
   }
 }
+// router.beforeEach一定要放在vue实例创建之前，刷新时的当前路径不会进beforeEach
 new Vue({
   router,
   store,
