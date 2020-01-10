@@ -13,6 +13,10 @@
     color: #bbbbbb;
   }
 
+  .el-menu-item.is-active {
+    color: #409eff !important;
+  }
+
   .el-submenu__title:hover {
     background-color: #474d54;
   }
@@ -25,6 +29,7 @@
     background-color: #303133;
   }
 }
+
 .admin-login-container {
   .login-form {
     .el-button--primary {
@@ -37,8 +42,10 @@
       background-color: #3d6c9c !important;
       border-color: #3d6c9c !important;
     }
-    .el-button--primary.is-active, .el-button--primary:active {
-      
+
+    .el-button--primary.is-active,
+    .el-button--primary:active {
+
       background-color: #2c5884 !important;
       border-color: #2c5884 !important;
     }
@@ -57,8 +64,10 @@
       background-color: #3d6c9c !important;
       border-color: #3d6c9c !important;
     }
-    .el-button--primary.is-active, .el-button--primary:active {
-      
+
+    .el-button--primary.is-active,
+    .el-button--primary:active {
+
       background-color: #2c5884 !important;
       border-color: #2c5884 !important;
     }

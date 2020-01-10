@@ -39,9 +39,9 @@ export default {
       loading: false,
       accounts: [
         {
-          username: "order_agent01",
+          username: "second_agent01",
           password: "123456",
-          role: "order_agent"
+          role: "second_agent"
         },
         {
           username: "super_agent01",
@@ -103,8 +103,8 @@ export default {
           })
         );
         switch (result[0].role) {
-          case "order_agent":
-            this.$router.push("/agent/order/index");
+          case "second_agent":
+            this.$router.push("/agent/member/index");
             break;
           case "super_agent":
             this.$router.push("/agent/member/index");

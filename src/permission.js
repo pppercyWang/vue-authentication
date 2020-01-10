@@ -19,13 +19,22 @@ export const dynamicRoutes = {
             redirect: '/agent/member/index',
             icon: 'el-icon-star-on',
             children: [{
-                path: 'index',
-                component: () => import('@/views/midground/member/Index.vue'),
-                name: '会员列表',
-                meta: {
-                    roles: ['super_agent']
+                    path: 'index',
+                    component: () => import('@/views/midground/member/Index.vue'),
+                    name: '会员列表',
+                    meta: {
+                        roles: ['super_agent', 'second_agent']
+                    },
                 },
-            }, ]
+                {
+                    path: 'scheme',
+                    component: () => import('@/views/midground/member/Scheme.vue'),
+                    name: '优惠方案',
+                    meta: {
+                        roles: ['super_agent']
+                    },
+                },
+            ]
         },
         {
             path: '/agent/order',
@@ -38,7 +47,7 @@ export const dynamicRoutes = {
                 component: () => import('@/views/midground/order/Index.vue'),
                 name: '订单列表',
                 meta: {
-                    roles: ['super_agent', 'order_agent']
+                    roles: ['super_agent', 'second_agent']
                 },
             }, ]
         },
@@ -54,7 +63,7 @@ export const dynamicRoutes = {
                 component: () => import('@/views/midground/charge/Index.vue'),
                 name: '充值中心',
                 meta: {
-                    roles: ['super_agent']
+                    roles: ['super_agent', 'second_agent']
                 },
             }, ]
         },
