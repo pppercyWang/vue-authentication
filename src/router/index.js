@@ -18,7 +18,7 @@ const staticRoutes = [{
   },
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
   },
   {
     path: '/agent',
