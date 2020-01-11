@@ -1,5 +1,7 @@
 <template>
   <div class="login-container">
+    <div class="alert">前台未进行鉴权</div>
+    <div class="alert">中台：/agent 后台：/admin</div>
     <el-form
       class="login-form"
       auto-complete="on"
@@ -7,7 +9,7 @@
       :rules="form.rules"
       :model="form.loginModel"
     >
-      <h3 class="title">用户登录</h3>
+      <h3 class="title">前台登录</h3>
       <el-form-item prop="username">
         <el-input
           placeholder="请输入用户名"
@@ -112,11 +114,15 @@ export default {
   bottom: 0;
   width: 100%;
   background-color: #f3f3f3;
+  .alert{
+    text-align: center;
+    margin-top: 30px;
+  }
   .login-form {
     width: 420px;
     max-width: 100%;
     margin: 0 auto;
-    margin-top: 160px;
+    margin-top: 100px;
     padding: 30px;
     border: 1px solid #ececec;
     box-shadow: 2px 2px 16px;
