@@ -169,7 +169,7 @@ export const dynamicRoutes = {
         component: () => import('@/views/404.vue'),
     }
 }
-export function getValidRoutes(target, role, commit) {
+export function generateRoutes(target, role, commit) {
     let targetRoutes = _.cloneDeep(dynamicRoutes[target]);
     targetRoutes.forEach(route => {
         if (route.children && route.children.length !== 0) {
@@ -226,7 +226,7 @@ export function authentication(to, from, next, store, router) {
     }
     const isAuth = sessionStorage.getItem('isAuthentication')
     if (!isAuth || isAuth === '0') {
-        store.dispatch('generateRoutes', JSON.parse(sessionStorage.getItem('user')).role).then(validRoutes => {
+        store.dispatch('getValidRoutes', JSON.parse(sessionStorage.getItem('user')).role).then(validRoutes => {
             router.addRoutes(validRoutes)
             sessionStorage.setItem('isAuthentication', '1')
         })

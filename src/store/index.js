@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {
-  getValidRoutes
+  generateRoutes
 } from '@/permission'
 import _ from 'lodash'
 Vue.use(Vuex)
@@ -23,22 +23,22 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    generateRoutes({
+    getValidRoutes({
       commit
     }, role) {
       return new Promise(resolve => {
         let validRoutes
         switch (JSON.parse(sessionStorage.getItem('user')).ground) {
           case 'fore':
-            validRoutes = getValidRoutes('user', role, commit)
+            validRoutes = generateRoutes('user', role, commit)
             resolve(validRoutes);
             break
           case 'mid':
-            validRoutes = getValidRoutes('agent', role, commit)
+            validRoutes = generateRoutes('agent', role, commit)
             resolve(validRoutes);
             break
           case 'back':
-            validRoutes = getValidRoutes('admin', role, commit)
+            validRoutes = generateRoutes('admin', role, commit)
             resolve(validRoutes);
             break
         }
