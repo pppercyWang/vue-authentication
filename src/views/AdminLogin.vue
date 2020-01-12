@@ -1,5 +1,8 @@
 <template>
   <div class="admin-login-container">
+    <div class="alert">ip管理员：ip_admin01 123456</div>
+    <div class="alert">普通管理员: admin01 123456</div>
+    <div class="alert">超级管理员: super_admin01 123456</div>
     <el-form
       class="login-form"
       auto-complete="on"
@@ -132,11 +135,16 @@ export default {
   bottom: 0;
   width: 100%;
   background-color: #2d3a4b;
+  .alert {
+    text-align: center;
+    margin-top: 30px;
+    color: #ffffff;
+  }
   .login-form {
     width: 420px;
     max-width: 100%;
     margin: 0 auto;
-    margin-top: 160px;
+    margin-top: 70px;
     padding: 30px;
     border: 1px solid #232121;
     box-shadow: 2px 2px 16px;
